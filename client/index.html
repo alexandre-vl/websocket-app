@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Socket</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="./assets/js/main.js"></script>
+</head>
+<body>
+    <div id="messages">
+
+    </div>
+    <div class="send">
+        <form>
+            <input type="text" name="message" placeholder="Type a message">
+            <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function showMessage(text, isMine = false) {
+            if (text.length < 1) return
+            document.getElementById("messages").innerHTML += `
+                <li class="message-row ${isMine ? 'mine':'other'}">
+                    <div class="bubble">${text}
+                        <div class="message-time">${new Date().toLocaleTimeString().slice(0, -3)}</div>
+                    <li>
+                </li>
+            `;
+        }
+        const ws = new WebSocket('ws://localhost:8080');
+        ws.addEventListener('message', ev => {
+            ev.data.text().then(showMessage)
+        })
+        document.querySelector('form').onsubmit = ev => {
+            ev.preventDefault();
+            let message = ev.target.message.value;
+            ws.send(message);
+            showMessage(message, true);
+            message = '';
+            ev.target.reset();
+
+            const list = document.querySelectorAll("#messages li");
+            const last = list[list.length - 2];
+            if (last) {
+                last.scrollIntoView();
+            }
+
+        }
+    </script>
+
+</body>
+</html>

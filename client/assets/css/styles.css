@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style-type: none;
+}
+body {
+    background-color: #222;
+    color: white;
+    padding: 6rem 5rem;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #444444;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5759b7;
+    border-radius: 10px;
+}
+
+.send {
+    position: fixed;
+    bottom:0;
+    right:0;
+    left:0;
+    width: 100%;
+    height: 60px;
+    background-color: #222;
+}
+
+form {
+    position: fixed;
+    bottom:0;
+    right:0;
+    left:0;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    margin: 10px 50px;
+}
+
+button {
+    background-color: #222;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button svg {
+    width: 35px;
+    height: 35px;
+    fill: white;
+}
+
+input {
+    border: 1px solid #555;
+    background-color: #222;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+.message-row {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.bubble {
+    background-color: #444;
+    margin: 5px;
+    padding: 5px 20px;
+    width: fit-content;
+    font-size: 16px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.mine .bubble {
+    border-radius: 10px 0 10px 10px;
+    background-color: #5050b3;
+}
+.other .bubble {
+    border-radius: 0 10px 10px 10px;
+}
+
+.message-row.mine {
+    justify-content: right;
+}
+.message-row.other {
+    justify-content: left;
+}
+
+.message-time {
+    text-align: right;
+    font-size: 14px;
+    color: #888;
+}
